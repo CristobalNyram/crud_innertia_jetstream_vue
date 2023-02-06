@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Módulo de Notas
+              Module of notes
             </h2>
         </template>
 
@@ -11,18 +11,20 @@
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <div class="md:col-span-1">
                         <div class="px-4 sm:px0">
-                            <h3 class="text-lg text-gray-900">Detalle de una nota</h3>
-                            <p class="text-sm text-gray-600">{{ note.excerpt }}</p>
+                            <h3 class="text-lg text-gray-900">Details  of an event</h3>
+                            <p class="text-sm text-gray-600"></p>
                         </div>
                     </div>
                     <div class="md:col-span-2 mt-5 md:mt-0">
                         <div class="shadow bg-white md:rounded-md p-4">
-                            <p>{{ note.content }}</p>
+                            <p class="text-lg text-gray-500">Name: {{ event.name }}</p>
+                            <p class="text-lg text-gray-500">Slug: {{ event.slug }}</p>
+                            <p class="text-lg text-gray-500">Description: {{ event.description }}</p>
 
                             <hr class="my-6">
 
-                            <inertia-link :href="route('notes.index')" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">
-                                Volver
+                            <inertia-link :href="route('events.index')" class="bg-yellow-400 text-white font-bold py-2 px-4 rounded-md">
+                                Back
                             </inertia-link>
                         </div>
                     </div>
@@ -40,7 +42,7 @@
             AppLayout,
         },
         props: {
-            note: Object,
+            event: Object,
         }
     }
 </script>

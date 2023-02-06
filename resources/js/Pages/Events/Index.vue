@@ -18,10 +18,10 @@
                     <div class="md:col-span-2 mt-5 md:mt-0">
                         <div class="shadow bg-white md:rounded-md p-4">
                             <div class="flex justify-between">
-                                <input type="text" class="form-input rounded-md shadow-sm" placeholder="Buscar..." v-model="query_name">
+                                <input type="text" class="form-input rounded-md shadow-sm" placeholder="Shear by name..." v-model="query_name">
 
                                 <inertia-link :href="route('events.create')" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">
-                                    Crear
+                                    Create
                                 </inertia-link>
                             </div>
                             <hr class="my-6">
@@ -39,7 +39,13 @@
 
                                     </td>
                                     <td class="px-4 py-2">
-
+                                        <inertia-link :href="route('events.show', event.id)">
+                                            Show
+                                        </inertia-link>
+                                        <inertia-link :href="route('events.edit', event.id)">
+                                            Edit
+                                        </inertia-link>
+                                    </td>
                                     </td>
                                 </tr>
                             </table>
@@ -51,7 +57,7 @@
     </app-layout>
 </template>
 
-<script>
+<script >
     import AppLayout from '@/Layouts/AppLayout'
 
     export default {
@@ -68,7 +74,8 @@
         },
         watch: {
             query_name: function (value) {
-                this.$inertia.replace(this.route('events.index', {name: value}))
+               this.$inertia.replace(this.route('events.index', {name: value}))
+                //alert(value);
             }
         }
     }

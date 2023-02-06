@@ -208,7 +208,7 @@
 
         <!-- Page Content -->
         <main>
-            <div v-if="$page.flash.status" class="bg-blue-500 text-white text-sm font-bold p-4">
+            <div v-if="$page.flash.status" class=" bg-blue-500 text-white text-sm font-bold p-4">
                 <p>{{ $page.flash.status }}</p>
             </div>
 

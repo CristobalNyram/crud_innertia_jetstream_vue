@@ -16,14 +16,14 @@ class EventController extends Controller
      */
     public function index(Request $request)
     {
+        $events =Event::latest()
+        ->where('name', 'LIKE', "%$request->name%")
+        ->get();
 
          return Inertia::render('Events/Index',
             [
-            'events'=>Event::latest()
-            ->where('name', 'LIKE', "%$request->name%")
-            ->get()
-            ]
-    );
+                'events'=>$events
+            ]);
     }
 
     /**
@@ -45,7 +45,31 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request->validate(
+            [
+                'name'=>'required',
+                'slug'=>'required|unique:events,slug',
+                'description'=>'required',
+
+
+            ]
+        );
+
+
+        $event= new Event();
+        $event->name=$request->name;
+        $event->slug=$request->slug;
+        $event->description=$request->description;
+
+
+        if($event->save()){
+            return redirect()->route('events.edit',$event->id);
+
+        }
+
+
     }
 
     /**
@@ -56,7 +80,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return Inertia::render('Events/Show',compact('event'));
+
     }
 
     /**
@@ -67,7 +92,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return Inertia::render('Events/Edit',compact('event'));
+
     }
 
     /**
@@ -79,7 +105,31 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+
+        $request->validate(
+            [
+                'name'=>'required',
+                'slug'=>'required|unique:events,slug',
+                'description'=>'required',
+
+
+            ]
+        );
+
+        // $event->update($request->all());
+
+        $event->name=$request->name;
+        $event->slug=$request->slug;
+        $event->description=$request->description;
+
+
+        if($event->update()){
+            return redirect()->route('events.index');
+
+        }
+
+
+
     }
 
     /**
@@ -90,6 +140,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return redirect()->route('events.index')->with('status','Event deleted');
     }
 }
