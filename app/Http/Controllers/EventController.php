@@ -14,11 +14,15 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
          return Inertia::render('Events/Index',
-            ['events'=>Event::latest()->get()]
+            [
+            'events'=>Event::latest()
+            ->where('name', 'LIKE', "%$request->name%")
+            ->get()
+            ]
     );
     }
 
@@ -29,7 +33,8 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Events/Create');
+
     }
 
     /**
