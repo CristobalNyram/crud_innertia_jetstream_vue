@@ -11,3 +11,6 @@ Route::get('dashboard', [App\Http\Controllers\PageController::class, 'dashboard'
 
 Route::resource('notes', App\Http\Controllers\NoteController::class)
     ->middleware('auth:sanctum');
+
+ Route::resource('events', App\Http\Controllers\EventController::class)
+    ->middleware('auth:sanctum');
